@@ -5,26 +5,48 @@
 #include "Global.hh"
 
 const std::vector<sf::IntRect> Global::jumpAnimations = {
-    sf::IntRect(13, 7, 40, 40),
-    sf::IntRect(61, 5, 40, 40)
+    sf::IntRect(13, 7, 28, 31),
+    sf::IntRect(61, 5, 28, 34)
 };
 
 const std::vector<sf::IntRect> Global::idleAnimations = {
-    sf::IntRect(12, 7, 40, 40),
-    sf::IntRect(60, 6, 40, 40),
-    sf::IntRect(108, 6, 40, 40),
-    sf::IntRect(156, 7, 40, 40),
-    sf::IntRect(204, 7, 40, 40)
+    sf::IntRect(12, 7, 28, 32),
+    sf::IntRect(60, 6, 28, 33),
+    sf::IntRect(108, 6, 28, 33),
+    sf::IntRect(156, 7, 28, 32),
+    sf::IntRect(204, 7, 28, 32)
 };
 
 const std::vector<sf::IntRect> Global::runAnimations = {
-    sf::IntRect(8, 5, 40, 40),
-    sf::IntRect(53, 3, 40, 40),
-    sf::IntRect(102, 5, 40, 40),
-    sf::IntRect(152, 4, 40, 40),
-    sf::IntRect(196, 3, 40, 40),
-    sf::IntRect(248, 5, 40, 40),
-}; // just changed the width and height of the rects to 40, but they still reappear and disappear
+    sf::IntRect(8, 5, 32, 34),
+    sf::IntRect(53, 3, 35, 31),
+    sf::IntRect(102, 5, 34, 34),
+    sf::IntRect(152, 4, 32, 34),
+    sf::IntRect(196, 3, 36, 31),
+    sf::IntRect(248, 5, 32, 34),
+};
+
+// const std::vector<sf::IntRect> Global::jumpAnimations = {
+//     sf::IntRect(13, 7, 40, 40),
+//     sf::IntRect(61, 5, 40, 40)
+// };
+
+// const std::vector<sf::IntRect> Global::idleAnimations = {
+//     sf::IntRect(12, 7, 40, 40),
+//     sf::IntRect(60, 6, 40, 40),
+//     sf::IntRect(108, 6, 40, 40),
+//     sf::IntRect(156, 7, 40, 40),
+//     sf::IntRect(204, 7, 40, 40)
+// };
+
+// const std::vector<sf::IntRect> Global::runAnimations = {
+//     sf::IntRect(8, 5, 40, 40),
+//     sf::IntRect(53, 3, 40, 40),
+//     sf::IntRect(102, 5, 40, 40),
+//     sf::IntRect(152, 4, 40, 40),
+//     sf::IntRect(196, 3, 40, 40),
+//     sf::IntRect(248, 5, 40, 40),
+// };
 
 const std::vector<sf::IntRect> Global::deathAnimations = {
     sf::IntRect(12, 7, 29, 32),

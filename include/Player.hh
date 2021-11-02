@@ -38,10 +38,9 @@ private:
     sf::Texture* currentTexture = nullptr;
     std::vector<sf::IntRect> currectVector = Global::idleAnimations;
     size_t animationIndex = 0;
+    bool animationLock = false;
     sf::Sprite playerSprite;
     sf::Vector2f scale = {3.f, 3.f};
-
-    void setIdle();
 
     sf::Vector2f direction = {0.f, 0.f};
 
@@ -50,8 +49,6 @@ private:
 
     bool isMoving = false;
     bool onAir = false;
-    unsigned int jumpCounter = 0;
-    unsigned int jumpLimit = 2;
 
     sf::Vector2f pos;
 

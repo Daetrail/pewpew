@@ -35,13 +35,11 @@ Player::~Player()
 
 void Player::update(float deltaTime, unsigned int width, unsigned int height)
 {
-
-
     if (!this->isMoving && !this->onAir)
     {
         this->currectVector = Global::idleAnimations;
         this->currentTexture = &this->idleTexture;
-        this->playerSprite.setTexture(*this->currentTexture);
+        this->playerSprite.setTextureRect(this->currectVector[this->animationIndex]);
         if (this->direction == sf::Vector2f(1, 0))
             this->playerSprite.setScale(this->scale);
         else if (this->direction == sf::Vector2f(-1, 0))
@@ -51,7 +49,9 @@ void Player::update(float deltaTime, unsigned int width, unsigned int height)
     {
         this->currectVector = Global::jumpAnimations;
         this->currentTexture = &this->jumpTexture;
-        this->playerSprite.setTexture(*this->currentTexture);
+        if (this->animationIndex >= Global::jumpAnimations.size())
+            this->animationIndex = 0;
+        this->playerSprite.setTextureRect(this->currectVector[this->animationIndex]);
         if (this->direction == sf::Vector2f(1, 0))
             this->playerSprite.setScale(this->scale); 
         else if (this->direction == sf::Vector2f(-1, 0))
@@ -59,16 +59,6 @@ void Player::update(float deltaTime, unsigned int width, unsigned int height)
     }
 
     this->totalTime += deltaTime;
-
-    if (this->totalTime >= this->switchTime)
-    {
-        this->totalTime -= this->switchTime;
-        this->playerSprite.setTextureRect(this->currectVector[this->animationIndex]);
-
-        this->animationIndex++;
-        if (this->animationIndex >= this->currectVector.size())
-            this->animationIndex = 0;
-    }
 
     this->levelBoundary(width, height);
 }
@@ -120,14 +110,6 @@ void Player::levelBoundary(unsigned int width, unsigned int height)
     }
 }
 
-void Player::setIdle()
-{
-    this->currentTexture = &this->idleTexture;
-    this->playerSprite.setTexture(*this->currentTexture);
-    this->currectVector = Global::idleAnimations;   
-    this->playerSprite.setScale(this->scale);   
-}
-
 void Player::move(sf::Vector2f direction)
 {
     this->direction = direction;
@@ -135,7 +117,6 @@ void Player::move(sf::Vector2f direction)
     {
         this->currectVector = Global::runAnimations;
         this->currentTexture = &this->runTexture;
-        this->playerSprite.setTexture(*this->currentTexture);
         this->playerSprite.setScale(this->scale);
         this->isMoving = true;
     }
@@ -143,7 +124,6 @@ void Player::move(sf::Vector2f direction)
     {
         this->currectVector = Global::runAnimations;
         this->currentTexture = &this->runTexture;
-        this->playerSprite.setTexture(*this->currentTexture);
         this->playerSprite.setScale(this->scale.x * -1, this->scale.y);
         this->isMoving = true;
     }
@@ -153,11 +133,22 @@ void Player::move(sf::Vector2f direction)
 
 void Player::jump()
 {
-    this->playerSprite.move(0.f, this->jumpSpeed * -1);
-    this->onAir = true;
+    if (!this->onAir)
+        this->playerSprite.move(0.f, this->jumpSpeed * -1);
+        this->onAir = true;
 }
 
 void Player::draw(sf::RenderWindow &window)
 {
+    if (this->totalTime >= this->switchTime)
+    {
+        this->totalTime -= this->switchTime;
+
+        this->animationIndex++;
+    }
+    if (this->animationIndex >= this->currectVector.size())
+            this->animationIndex = 0;
+    this->playerSprite.setTexture(*this->currentTexture);
+    this->playerSprite.setTextureRect(this->currectVector[this->animationIndex]);
     window.draw(this->playerSprite);
 }

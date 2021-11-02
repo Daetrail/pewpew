@@ -21,7 +21,7 @@ public:
     float getSpeed();
     sf::Vector2f getPos();
 
-    // void levelBoundary(unsigned int &width, unsigned int &height);
+    void levelBoundary(unsigned int &width, unsigned int &height);
 
     void move(sf::Vector2f direction);
 
@@ -39,6 +39,8 @@ private:
     size_t animationIndex = 0;
     sf::Sprite playerSprite;
     sf::Vector2f scale = {3.f, 3.f};
+
+    void setIdle();
 
     float switchTime;
     float totalTime = 0.f;

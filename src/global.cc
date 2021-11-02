@@ -54,7 +54,7 @@ unsigned int Global::currentGameState = Global::mainMenu;
 const std::string Global::TITLE = "Pew Pew";
 const std::string Global::VERSION = "0.0.1";
 
-const sf::Vector2f Global::VIEW_RESOLUTION = {1280.f, 760.f};
+const sf::Vector2f Global::VIEW_RESOLUTION = {640.f, 380.f};
 
 const std::string Global::MENU_BACKGROUNDS = "res/images/background.png";
 const std::string Global::GAME_BACKGROUND = "res/images/game/game-bg.jpg";

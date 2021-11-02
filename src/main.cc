@@ -17,7 +17,7 @@ int main()
     window.setPosition(sf::Vector2i(sf::VideoMode::getDesktopMode().width / 2 - Global::WINDOW_WIDTH / 2, sf::VideoMode::getDesktopMode().height / 2 - Global::WINDOW_WIDTH / 3));
 
     sf::View view(sf::Vector2f(0.f, 0.f), Global::VIEW_RESOLUTION);
-    sf::View ordinaryView(sf::Vector2f(static_cast<float>(window.getSize().x / 2), static_cast<float>(window.getSize().y / 2)), Global::VIEW_RESOLUTION);
+    sf::View ordinaryView(sf::Vector2f(static_cast<float>(window.getSize().x / 2), static_cast<float>(window.getSize().y / 2)), sf::Vector2f(static_cast<float>(window.getSize().x), static_cast<float>(window.getSize().y)));
 
     sf::Font font1;
     if (!(font1.loadFromFile(Global::FONT)))
@@ -94,15 +94,15 @@ int main()
                 game.handlePlayerMovements();
 
                 view.setCenter(game.getWinPlayerPos());
-    
-                // if (view.getCenter().x - view.getSize().x / 2 < 0)
-                //     view.setCenter(sf::Vector2f(view.getSize().x - view.getSize().x / 2, view.getCenter().y));
-                // if (view.getCenter().x + view.getSize().x / 2 > window.getSize().x)
-                //     view.setCenter(sf::Vector2f(view.getSize().x + view.getSize().x / 2, view.getCenter().y));
-                // if (view.getCenter().y - view.getSize().y / 2 < 0)
-                //     view.setCenter(sf::Vector2f(view.getSize().x, view.getSize().y + view.getSize().y / 2));
-                // if (view.getCenter().y + view.getSize().y / 2 > window.getSize().y)
-                //     view.setCenter(sf::Vector2f(view.getSize().x, view.getSize().y - view.getSize().y / 2));
+x
+                if (view.getCenter().x - view.getSize().x / 2 < 0)
+                    view.setCenter(sf::Vector2f(view.getSize().x / 2, view.getCenter().y));
+                if (view.getCenter().x + view.getSize().x / 2 > Global::GAME_BG_WIDTH)
+                    view.setCenter(sf::Vector2f(Global::GAME_BG_WIDTH - view.getSize().x / 2, view.getCenter().y));
+                if (view.getCenter().y - view.getSize().y / 2 < 0)
+                    view.setCenter(sf::Vector2f(view.getCenter().x, view.getSize().y / 2));
+                if (view.getCenter().y + view.getSize().y / 2 > Global::GAME_BG_HEIGHT)
+                    view.setCenter(sf::Vector2f(view.getCenter().x, Global::GAME_BG_HEIGHT - view.getSize().y / 2));
 
                 window.setView(view);
 

@@ -12,8 +12,6 @@ Game::Game(std::string bgFile, sf::RenderWindow &window)
     else
     {
         this->bgSprite.setTexture(this->bgTexture);
-        this->bgSprite.setOrigin(this->bgSprite.getGlobalBounds().width / 2, this->bgSprite.getGlobalBounds().height / 2);
-        this->bgSprite.setPosition(window.getSize().x / 2, window.getSize().y / 2);
     }
 
     player.setSpeed(3.f);

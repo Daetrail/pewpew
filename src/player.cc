@@ -80,10 +80,27 @@ sf::Vector2f Player::getPos()
     return sf::Vector2f(this->playerSprite.getPosition());
 }
 
-// void Player::levelBoundary(unsigned int &width, unsigned int &height)
-// {
-//     if ()
-// }
+void Player::levelBoundary(unsigned int &width, unsigned int &height)
+{
+    if (this->playerSprite.getPosition().x - this->playerSprite.getGlobalBounds().width / 2 < 0)
+    {
+        this->playerSprite.move(sf::Vector2f(1, 0) * this->speed);
+        this->setIdle();
+    }
+    else if (this->playerSprite.getPosition().x + this->playerSprite.getGlobalBounds().width / 2 > width)
+    {
+        this->playerSprite.move(sf::Vector2f(-1, 0) * this->speed);
+    }
+    else if 
+}
+
+void Player::setIdle()
+{
+    this->currentTexture = &this->idleTexture;
+    this->playerSprite.setTexture(*this->currentTexture);
+    this->currectVector = Global::idleAnimations;   
+    this->playerSprite.setScale(this->scale);   
+}
 
 void Player::move(sf::Vector2f direction)
 {

@@ -37,12 +37,25 @@ void Player::update(float deltaTime, unsigned int width, unsigned int height)
 {
 
 
-    if (!this->isMoving)
+    if (!this->isMoving && !this->onAir)
     {
         this->currectVector = Global::idleAnimations;
         this->currentTexture = &this->idleTexture;
         this->playerSprite.setTexture(*this->currentTexture);
-        this->playerSprite.setScale(this->scale);
+        if (this->direction == sf::Vector2f(1, 0))
+            this->playerSprite.setScale(this->scale);
+        else if (this->direction == sf::Vector2f(-1, 0))
+            this->playerSprite.setScale(this->scale.x * -1, this->scale.y);
+    }
+    if (this->onAir)
+    {
+        this->currectVector = Global::jumpAnimations;
+        this->currentTexture = &this->jumpTexture;
+        this->playerSprite.setTexture(*this->currentTexture);
+        if (this->direction == sf::Vector2f(1, 0))
+            this->playerSprite.setScale(this->scale); 
+        else if (this->direction == sf::Vector2f(-1, 0))
+            this->playerSprite.setScale(this->scale.x * -1, this->scale.y);
     }
 
     this->totalTime += deltaTime;
@@ -100,7 +113,11 @@ void Player::levelBoundary(unsigned int width, unsigned int height)
     }
 
     if (this->playerSprite.getPosition().y < Global::GAME_BG_HEIGHT  - this->playerSprite.getGlobalBounds().height / 2)
-        this->playerSprite.move(0.f, this->speed);
+        this->playerSprite.move(0.f, this->gravity);
+    else
+    {
+        this->onAir = false;
+    }
 }
 
 void Player::setIdle()
@@ -113,6 +130,7 @@ void Player::setIdle()
 
 void Player::move(sf::Vector2f direction)
 {
+    this->direction = direction;
     if (direction == sf::Vector2f(1.f, 0.f))
     {
         this->currectVector = Global::runAnimations;
@@ -135,10 +153,8 @@ void Player::move(sf::Vector2f direction)
 
 void Player::jump()
 {
-    float dest = this->playerSprite.getPosition().y - this->jumpHeight;
-
-    while (this->playerSprite.getPosition().y > dest)
-        this->playerSprite.move(0.f, this->jumpSpeed * -1);
+    this->playerSprite.move(0.f, this->jumpSpeed * -1);
+    this->onAir = true;
 }
 
 void Player::draw(sf::RenderWindow &window)

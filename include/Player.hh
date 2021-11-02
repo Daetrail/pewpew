@@ -43,17 +43,22 @@ private:
 
     void setIdle();
 
+    sf::Vector2f direction = {0.f, 0.f};
+
     float switchTime;
     float totalTime = 0.f;
 
     bool isMoving = false;
-    bool OnAir = false;
+    bool onAir = false;
+    unsigned int jumpCounter = 0;
+    unsigned int jumpLimit = 2;
 
     sf::Vector2f pos;
 
+    float gravity = 5.f;
+
     float speed = 1.f;
-    float jumpHeight = 60.f;
-    float jumpSpeed = 1.f;
+    float jumpSpeed = 40.f;
 
     int health, armour, energy, coins = 0;
 };

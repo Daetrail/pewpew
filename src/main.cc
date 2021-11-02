@@ -77,6 +77,15 @@ int main()
 
             if (aboutMenu.buttonPressed(mousePos, event) == Global::back)
                 Global::currentGameState = Global::mainMenu;
+
+            switch (Global::currentGameState)
+            {
+                case Global::game:
+                    game.handlePlayerEvent(event);
+                    break;
+                default:
+                    break;
+            }
         }
 
         switch (Global::currentGameState)
@@ -94,7 +103,7 @@ int main()
                 game.handlePlayerMovements();
 
                 view.setCenter(game.getWinPlayerPos());
-x
+
                 if (view.getCenter().x - view.getSize().x / 2 < 0)
                     view.setCenter(sf::Vector2f(view.getSize().x / 2, view.getCenter().y));
                 if (view.getCenter().x + view.getSize().x / 2 > Global::GAME_BG_WIDTH)
@@ -106,7 +115,7 @@ x
 
                 window.setView(view);
 
-                game.update(deltaTime);
+                game.update(deltaTime, Global::GAME_BG_WIDTH, Global::GAME_BG_HEIGHT);
                 break;
 
             default:

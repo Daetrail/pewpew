@@ -13,7 +13,7 @@ public:
     Player();
     ~Player();
 
-    void update(float deltaTime);
+    void update(float deltaTime, unsigned int width, unsigned int height);
 
     void setSpeed(float speed);
     void notMoving();
@@ -21,9 +21,10 @@ public:
     float getSpeed();
     sf::Vector2f getPos();
 
-    void levelBoundary(unsigned int &width, unsigned int &height);
+    void levelBoundary(unsigned int width, unsigned int height);
 
     void move(sf::Vector2f direction);
+    void jump();
 
     void draw(sf::RenderWindow &window);
 
@@ -46,11 +47,13 @@ private:
     float totalTime = 0.f;
 
     bool isMoving = false;
-    bool animationIndexLock = false;
+    bool OnAir = false;
 
     sf::Vector2f pos;
 
     float speed = 1.f;
+    float jumpHeight = 60.f;
+    float jumpSpeed = 1.f;
 
     int health, armour, energy, coins = 0;
 };

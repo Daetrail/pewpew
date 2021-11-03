@@ -66,7 +66,7 @@ void Player::update(float deltaTime, unsigned int width, unsigned int height)
 void Player::setSpeed(float speed)
 {
     this->speed = speed;
-}
+}   
 
 void Player::notMoving()
 {
@@ -102,7 +102,7 @@ void Player::levelBoundary(unsigned int width, unsigned int height)
         this->playerSprite.setPosition(this->playerSprite.getPosition().x, height - this->playerSprite.getGlobalBounds().height / 2);
     }
 
-    if (this->playerSprite.getPosition().y < Global::GAME_BG_HEIGHT  - this->playerSprite.getGlobalBounds().height / 2)
+    if (this->playerSprite.getPosition().y < this->groundLevel - this->playerSprite.getGlobalBounds().height / 2)
         this->playerSprite.move(0.f, this->gravity);
     else
     {

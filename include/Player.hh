@@ -53,6 +53,7 @@ private:
     sf::Vector2f pos;
 
     float gravity = 5.f;
+    unsigned int groundLevel = Global::GAME_BG_HEIGHT;
 
     float speed = 1.f;
     float jumpSpeed = 40.f;

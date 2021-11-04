@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 #include <SFML/Graphics.hpp>
 
 #include "Player.hh"
@@ -108,6 +109,12 @@ void Player::levelBoundary(unsigned int width, unsigned int height)
     {
         this->onAir = false;
     }
+}
+
+std::vector<float> Player::getPosAndBounds()
+{
+    std::vector<float> pb = {this->playerSprite.getPosition().x, this->playerSprite.getPosition().y, this->playerSprite.getGlobalBounds().width, this->playerSprite.getGlobalBounds().height};
+    return pb;
 }
 
 void Player::move(sf::Vector2f direction)

@@ -23,6 +23,8 @@ public:
 
     void levelBoundary(unsigned int width, unsigned int height);
 
+    std::vector<float> getPosAndBounds();
+
     void move(sf::Vector2f direction);
     void jump();
 

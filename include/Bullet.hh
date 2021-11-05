@@ -7,7 +7,8 @@
 class Bullet
 {
 public:
-    Bullet(float scale);
+    Bullet(sf::Vector2f scale);
+    Bullet();
 
     void update(Player &player, sf::Vector2f direction, float deltaTime);
 

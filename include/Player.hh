@@ -25,6 +25,9 @@ public:
 
     std::vector<float> getPosAndBounds();
 
+    sf::Vector2f getScale();
+    sf::Vector2f getDirection();
+
     void move(sf::Vector2f direction);
     void jump();
 
@@ -44,7 +47,7 @@ private:
     sf::Sprite playerSprite;
     sf::Vector2f scale = {3.f, 3.f};
 
-    sf::Vector2f direction = {0.f, 0.f};
+    sf::Vector2f direction = {1.f, 0.f};
 
     float switchTime;
     float totalTime = 0.f;

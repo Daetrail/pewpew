@@ -5,7 +5,8 @@
 #include "Global.hh"
 
 Game::Game(std::string bgFile, sf::RenderWindow &window)
-    : player(Global::jumpFile, Global::idleFile, Global::runFile, Global::deathFile, Global::crouchFile, 0.2f)
+    : player(Global::jumpFile, Global::idleFile, Global::runFile, Global::deathFile, Global::crouchFile, 0.2f),
+      bullet(player.getScale())
 {
     if (!this->bgTexture.loadFromFile(bgFile))
         std::cout << "Unable to load " << bgFile << std::endl;
@@ -20,6 +21,7 @@ Game::Game(std::string bgFile, sf::RenderWindow &window)
 void Game::update(float deltaTime, unsigned int width, unsigned int height)
 {
     this->player.update(deltaTime, width, height);
+    this->bullet.update(this->player, this->player.getDirection(), deltaTime);
 }
 
 sf::Vector2f Game::getWinPlayerPos()
@@ -50,6 +52,11 @@ void Game::handlePlayerEvent(sf::Event &event)
         {
             this->player.jump(); 
         }
+
+        if (event.key.code == sf::Keyboard::L)
+        {
+            this->bullet.fire();
+        }
     }
 }
 
@@ -58,4 +65,5 @@ void Game::draw(sf::RenderWindow &window)
     window.draw(this->bgSprite);
 
     this->player.draw(window);
+    this->bullet.draw(window, this->player.getDirection());
 }

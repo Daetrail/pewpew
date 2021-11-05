@@ -117,6 +117,16 @@ std::vector<float> Player::getPosAndBounds()
     return pb;
 }
 
+sf::Vector2f Player::getScale()
+{
+    return this->scale;
+}
+
+sf::Vector2f Player::getDirection()
+{
+    return this->direction;
+}
+
 void Player::move(sf::Vector2f direction)
 {
     this->direction = direction;

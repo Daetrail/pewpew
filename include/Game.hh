@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Bullet.hh"
 #include "Player.hh"
 
 class Game
@@ -18,6 +19,8 @@ public:
     void handlePlayerMovements();
     void handlePlayerEvent(sf::Event &event);
 
+    void handleFiring();
+
     void draw(sf::RenderWindow &window);
 
 private:
@@ -25,5 +28,6 @@ private:
     sf::Sprite bgSprite;
 
     Player player;
+    Bullet bullet;
 
 };

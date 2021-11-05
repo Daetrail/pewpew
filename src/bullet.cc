@@ -3,14 +3,16 @@
 
 #include "Bullet.hh"
 
-Bullet::Bullet(float scale)
+Bullet::Bullet(sf::Vector2f scale)
 {
     this->bulletSprite.setTexture(this->bulletTex);
     this->muzzleFlashSprite.setTexture(this->muzzleFlashTex);
-    this->bulletSprite.setScale(scale, scale);
-    this->muzzleFlashSprite.setScale(scale, scale);
+    this->bulletSprite.setScale(scale);
+    this->muzzleFlashSprite.setScale(scale);
     this->bulletSprite.setOrigin(this->bulletSprite.getGlobalBounds().width / 2, this->bulletSprite.getGlobalBounds().height);
 }
+
+Bullet::Bullet() {}
 
 void Bullet::update(Player &player, sf::Vector2f direction, float deltaTime)
 {
@@ -37,6 +39,11 @@ void Bullet::update(Player &player, sf::Vector2f direction, float deltaTime)
     this->totalTime += deltaTime;
 }
 
+void Bullet::fire()
+{
+    this->isFired = true;
+}
+
 void Bullet::draw(sf::RenderWindow &window, sf::Vector2f direction)
 {
     if (this->isFired)
@@ -56,6 +63,7 @@ void Bullet::draw(sf::RenderWindow &window, sf::Vector2f direction)
         if (this->bulletSprite.getPosition().x - this->bulletSprite.getGlobalBounds().width / 2 < 0 || 
             this->bulletSprite.getPosition().x + this->bulletSprite.getGlobalBounds().width / 2 > Global::GAME_BG_WIDTH)
             this->isFired = false;
+            this->posLock = false;
     }
 
     
